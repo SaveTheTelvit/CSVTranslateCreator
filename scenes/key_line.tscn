@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwmjkwyg2omtx"]
+
+[ext_resource type="Script" path="res://scripts/key_line.gd" id="1_qiqum"]
+
+[node name="KeyLine" type="HBoxContainer" groups=["store_element"]]
+offset_right = 256.0
+offset_bottom = 31.0
+script = ExtResource("1_qiqum")
+
+[node name="KeyEdit" type="TextEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+placeholder_text = "Key
+
+"
+context_menu_enabled = false
+shortcut_keys_enabled = false
+drag_and_drop_selection_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+wrap_mode = 1
+scroll_fit_content_height = true
+
+[node name="TextEdit" type="TextEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Text
+"
+context_menu_enabled = false
+drag_and_drop_selection_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+wrap_mode = 1
+scroll_fit_content_height = true
+
+[connection signal="gui_input" from="KeyEdit" to="." method="_on_key_edit_gui_input"]
+[connection signal="text_changed" from="KeyEdit" to="." method="_check_input"]
+[connection signal="text_changed" from="TextEdit" to="." method="_check_input"]

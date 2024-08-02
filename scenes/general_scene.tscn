@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://bd0uecb5x5lmd"]
+
+[ext_resource type="Script" path="res://scripts/general_scene.gd" id="1_ieql4"]
+[ext_resource type="PackedScene" uid="uid://jho7rx2rtb6v" path="res://scenes/save_manager.tscn" id="2_p1j7g"]
+[ext_resource type="PackedScene" uid="uid://dui8etap3b4by" path="res://scenes/key_box.tscn" id="3_372pd"]
+[ext_resource type="PackedScene" uid="uid://blln2a1ba7gge" path="res://scenes/left_panel.tscn" id="3_ui45q"]
+[ext_resource type="PackedScene" uid="uid://dodgtgm7lptn1" path="res://scenes/locales_setting.tscn" id="5_kvri2"]
+[ext_resource type="PackedScene" uid="uid://d3gm4k87dves0" path="res://scenes/project_menu.tscn" id="6_t3p02"]
+
+[node name="GeneralScene" type="Node"]
+script = ExtResource("1_ieql4")
+
+[node name="SaveManager" parent="." instance=ExtResource("2_p1j7g")]
+
+[node name="Control" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftPanel" parent="Control/HBoxContainer" instance=ExtResource("3_ui45q")]
+layout_mode = 2
+
+[node name="KeyBox" parent="Control/HBoxContainer" instance=ExtResource("3_372pd")]
+layout_mode = 2
+
+[node name="LocalesSetting" parent="Control/HBoxContainer" instance=ExtResource("5_kvri2")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ProjectMenu" parent="." instance=ExtResource("6_t3p02")]
+
+[node name="FileDialog" type="FileDialog" parent="."]
+title = "Open a Directory"
+size = Vector2i(1152, 648)
+wrap_controls = false
+transient = false
+exclusive = false
+unresizable = true
+borderless = true
+popup_window = true
+ok_button_text = "Выбрать текущую папку"
+cancel_button_text = "Отмена"
+file_mode = 2
+access = 2
+use_native_dialog = true
+
+[connection signal="dir_selected" from="FileDialog" to="." method="_on_file_dialog_dir_selected"]

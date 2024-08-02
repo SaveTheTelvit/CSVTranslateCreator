@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://b04xr3d1r0a1h"]
+
+[ext_resource type="Script" path="res://scripts/object_line.gd" id="1_dvv08"]
+
+[node name="ObjectLine" type="HBoxContainer" groups=["store_element"]]
+offset_right = 294.0
+offset_bottom = 35.0
+script = ExtResource("1_dvv08")
+
+[node name="KeyEdit" type="TextEdit" parent="." groups=["store_element"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+placeholder_text = "Key
+
+"
+context_menu_enabled = false
+shortcut_keys_enabled = false
+drag_and_drop_selection_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+wrap_mode = 1
+scroll_fit_content_height = true
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+text = "Редактировать"
+
+[connection signal="focus_exited" from="KeyEdit" to="." method="_check_input"]
+[connection signal="gui_input" from="KeyEdit" to="." method="_on_key_edit_gui_input"]
+[connection signal="text_changed" from="KeyEdit" to="." method="_on_key_edit_text_changed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

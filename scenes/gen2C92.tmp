@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bd0uecb5x5lmd"]
+
+[ext_resource type="Script" path="res://scripts/general_scene.gd" id="1_ieql4"]
+[ext_resource type="PackedScene" uid="uid://jho7rx2rtb6v" path="res://scenes/save_manager.tscn" id="2_p1j7g"]
+[ext_resource type="PackedScene" uid="uid://dui8etap3b4by" path="res://scenes/key_box.tscn" id="3_372pd"]
+[ext_resource type="PackedScene" uid="uid://blln2a1ba7gge" path="res://scenes/left_panel.tscn" id="3_ui45q"]
+
+[node name="GeneralScene" type="Node"]
+script = ExtResource("1_ieql4")
+
+[node name="SaveManager" parent="." instance=ExtResource("2_p1j7g")]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftPanel" parent="Control/HBoxContainer" instance=ExtResource("3_ui45q")]
+layout_mode = 2
+
+[node name="KeyBox" parent="Control/HBoxContainer" instance=ExtResource("3_372pd")]
+layout_mode = 2
