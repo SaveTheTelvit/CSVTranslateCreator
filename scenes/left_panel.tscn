@@ -59,7 +59,7 @@ popup/item_2/id = 2
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-text = "Экспорт проекта"
+text = "Экспорт перевода (CSV)"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

@@ -11,7 +11,6 @@ func _notification(what):
 		save_data()
 
 func save_project(filename : String):
-	var file_path : String = "user://" + filename + ".csv_prepare"
 	if !project_names.has(filename):
 		project_names.push_back(filename)
 	var save_file : FileAccess = FileAccess.open("user://" + filename + ".csv_prepare", FileAccess.WRITE)
@@ -31,6 +30,37 @@ func load_project(filename : String):
 func delete_project(file_name : String):
 	DirAccess.remove_absolute("user://" + file_name + ".csv_prepare")
 	project_names.remove_at(project_names.find(file_name))
+
+func export_project(file_name : String, dir : String):
+	if !project_names.has(file_name):
+		return
+	if !DirAccess.dir_exists_absolute(dir):
+		return
+	load_project(file_name)
+	var export_file : FileAccess = FileAccess.open(dir + "/" + file_name + ".csv_prepare", FileAccess.WRITE)
+	if get_parent() and get_parent().has_method("save"):
+		export_file.store_line(JSON.stringify(get_parent().save()))
+
+func import_project(path : String) -> bool:
+	var file_name : String = path.get_file()
+	file_name = file_name.erase(
+		file_name.length() - file_name.get_extension().length() - 1, 
+		file_name.get_extension().length() + 1
+	)
+	if project_names.has(file_name):
+		return false
+	if !FileAccess.file_exists(path):
+		return false
+	if path.get_extension() != "csv_prepare":
+		return false
+	var save_file := FileAccess.open(path, FileAccess.READ)
+	while save_file.get_position() < save_file.get_length():
+		var json := JSON.new()
+		if json.parse(save_file.get_line()) == OK:
+			if get_parent() and get_parent().has_method("load"):
+				get_parent().load(json.get_data())
+				get_parent().file_name = file_name
+	return true
 
 func save_data():
 	var save_file : FileAccess = FileAccess.open("user://paths.data", FileAccess.WRITE)

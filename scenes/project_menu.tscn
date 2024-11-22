@@ -36,7 +36,6 @@ theme_override_font_sizes/font_size = 25
 text = "Список проектов"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 10
 
@@ -54,26 +53,50 @@ drag_and_drop_selection_enabled = false
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
-text = "Создать"
+focus_mode = 0
+text = "Создать новый"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 2
 
 [node name="ItemList" type="ItemList" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 0
 allow_reselect = true
 max_text_lines = 5
 auto_height = true
 
+[node name="ButtonsLine" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsLine"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+focus_mode = 0
+text = "Назад"
+
+[node name="ImportButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsLine"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+text = "Импорт..."
+
 [node name="PopupMenu" type="PopupMenu" parent="."]
-size = Vector2i(96, 35)
-item_count = 1
+size = Vector2i(96, 62)
+item_count = 2
 item_0/text = "Удалить"
 item_0/id = 0
+item_1/text = "Экспорт"
+item_1/id = 1
 
 [connection signal="text_submitted" from="MarginContainer/VBoxContainer/HBoxContainer3/LineEdit" to="." method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer3/Button" to="." method="_on_button_pressed"]
 [connection signal="item_clicked" from="MarginContainer/VBoxContainer/HBoxContainer/ItemList" to="." method="_on_item_list_item_clicked"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsLine/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsLine/ImportButton" to="." method="_on_import_button_pressed"]
 [connection signal="index_pressed" from="PopupMenu" to="." method="_on_popup_menu_index_pressed"]

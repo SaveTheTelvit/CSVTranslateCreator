@@ -7,6 +7,8 @@ const BG_COLOR : Color = Color("#363d4a")
 var root_object : StoreObject = StoreObject.new()
 var file_name : String = ""
 var settings_opened = false
+var file_dialog_mode = 0
+var export_name : String = ""
 
 func _ready():
 	RenderingServer.set_default_clear_color(BG_COLOR)
@@ -19,6 +21,16 @@ func _ready():
 
 func _remove_file(file_name : String):
 	$SaveManager.delete_project(file_name)
+
+func _export_file(file_name : String):
+	export_name = file_name
+	file_dialog_mode = 1
+	_call_file_dialog()
+
+func _import_file():
+	file_dialog_mode = 2
+	$FileDialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+	_call_file_dialog()
 
 func _switch_scene():
 	settings_opened = true
@@ -49,16 +61,20 @@ func load_project():
 	file_name = ""
 	$Control.hide()
 	$ProjectMenu.show()
-	var paths : PackedStringArray = $SaveManager.project_names
-	$ProjectMenu.call_menu(paths)
+	var names : PackedStringArray = $SaveManager.project_names
+	$ProjectMenu.call_menu(names)
 	$ProjectMenu.remove_file_called.connect(_remove_file)
+	$ProjectMenu.export_file_called.connect(_export_file)
+	$ProjectMenu.import_file_called.connect(_import_file)
 	print(root_object.keys, " filename: ", file_name)
 	file_name = await $ProjectMenu.file_name_selected
 	$ProjectMenu.remove_file_called.disconnect(_remove_file)
+	$ProjectMenu.export_file_called.disconnect(_export_file)
+	$ProjectMenu.import_file_called.disconnect(_import_file)
 	$ProjectMenu.hide()
 	$Control.show()
-	if !paths.has(file_name):
-		paths.push_back(file_name)
+	if !names.has(file_name):
+		names.push_back(file_name)
 	$SaveManager.load_project(file_name)
 
 func load(dt : Dictionary):
@@ -82,4 +98,18 @@ func _call_file_dialog():
 	$FileDialog.popup()
 
 func _on_file_dialog_dir_selected(dir):
-	$SaveManager.export_file(dir)
+	match file_dialog_mode:
+		0:
+			$SaveManager.export_file(dir)
+		1:
+			$SaveManager.export_project(export_name, dir)
+			file_dialog_mode = 0
+
+func _on_file_dialog_file_selected(path):
+	match file_dialog_mode:
+		2:
+			if $SaveManager.import_project(path):
+				save_project()
+				$ProjectMenu.file_name_selected.emit(file_name)
+			$FileDialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR
+			file_dialog_mode = 0
