@@ -66,7 +66,6 @@ func load_project():
 	$ProjectMenu.remove_file_called.connect(_remove_file)
 	$ProjectMenu.export_file_called.connect(_export_file)
 	$ProjectMenu.import_file_called.connect(_import_file)
-	print(root_object.keys, " filename: ", file_name)
 	file_name = await $ProjectMenu.file_name_selected
 	$ProjectMenu.remove_file_called.disconnect(_remove_file)
 	$ProjectMenu.export_file_called.disconnect(_export_file)
