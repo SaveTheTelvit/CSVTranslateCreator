@@ -1,11 +1,29 @@
-class_name StoreObject extends Node
+class_name StoreObject extends Object
 
 var keys : Dictionary = {}
 var objects : Dictionary = {}
 var parent : StoreObject
 
+func reparent(obj : StoreObject) -> void:
+	parent = obj
+
+func duplicate(deep : bool = false) -> StoreObject:
+	var dup_obj = StoreObject.new()
+	dup_obj.parent = parent
+	dup_obj.keys = keys.duplicate(deep)
+	dup_obj.objects = objects.duplicate(deep)
+	return dup_obj
+
 func _init(_parent : StoreObject = null):
 	parent = _parent
+
+func is_ancestor(store_object : StoreObject) -> bool:
+	var obj : StoreObject = self
+	while obj != null:
+		if store_object == obj:
+			return true
+		obj = obj.parent
+	return false
 
 func add_key(key : String, value : String, locale : String):
 	if keys.get(key):
@@ -38,7 +56,6 @@ func load(dt : Dictionary):
 		if key == "objects":
 			var objects_ref : Dictionary = dt[key]
 			for i_key in objects_ref.keys():
-				objects_ref[i_key]
 				var obj = StoreObject.new(self)
 				obj.load(objects_ref[i_key])
 				objects[i_key] = obj

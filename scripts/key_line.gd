@@ -9,6 +9,9 @@ var _last_key : String = ""
 var key : set = _set_key, get = _get_key 
 var text : set = _set_text, get = _get_text
 
+func get_parent_obj() -> StoreObject:
+	return store_object
+
 func _set_store_object(obj : StoreObject):
 	store_object = obj
 	if (!key.is_empty()):

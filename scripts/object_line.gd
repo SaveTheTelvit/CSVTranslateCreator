@@ -7,6 +7,9 @@ var _last_key : String = ""
 var key : set = _set_key, get = _get_key
 var ref_object : StoreObject = null
 
+func get_parent_obj() -> StoreObject:
+	return ref_object.parent
+
 func _set_key(text : String):
 	$KeyEdit.text = text
 	_last_key = text

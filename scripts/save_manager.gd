@@ -60,7 +60,8 @@ func import_project(path : String) -> bool:
 			if get_parent() and get_parent().has_method("load"):
 				get_parent().load(json.get_data())
 				get_parent().file_name = file_name
-	return true
+			return true
+	return false
 
 func save_data():
 	var save_file : FileAccess = FileAccess.open("user://paths.data", FileAccess.WRITE)

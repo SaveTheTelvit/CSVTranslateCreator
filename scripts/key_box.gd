@@ -7,7 +7,7 @@ extends ScrollContainer
 var current_obj : StoreObject = null
 
 var last_line_index : int = -1
-var delete_target : Node = null
+var target : Node = null
 var target_is_object : bool = false
 var always_hide : bool = false
 
@@ -20,17 +20,26 @@ func _ready():
 	if !current_obj:
 		hide()
 
-func _del_string(obj : Node):
-	delete_target = obj
-	target_is_object = false
+func _pop_menu():
 	$PopupMenu.position = get_global_mouse_position()
 	$PopupMenu.show()
+	var index : int = $PopupMenu.get_item_index(0)
+	if $PopupMenu.is_item_disabled(index):
+		if KeyCopier.paste_is_possible(target.get_parent_obj()):
+			$PopupMenu.set_item_disabled(index, false)
+	else:
+		if !KeyCopier.paste_is_possible(target.get_parent_obj()):
+			$PopupMenu.set_item_disabled(index, true)
+
+func _del_string(obj : Node):
+	target = obj
+	target_is_object = false
+	_pop_menu()
 
 func _del_obj(obj : Node):
-	delete_target = obj
+	target = obj
 	target_is_object = true
-	$PopupMenu.position = get_global_mouse_position()
-	$PopupMenu.show()
+	_pop_menu()
 
 func clear():
 	get_tree().call_group("store_element", "queue_free")
@@ -81,14 +90,24 @@ func _on_button_2_pressed():
 	add_obj_line()
 
 func _on_popup_menu_id_pressed(id):
-	if delete_target:
-		if target_is_object:
-			var objects : Dictionary = delete_target.ref_object.parent["objects"]
-			objects[delete_target.key].queue_free()
-			objects.erase(delete_target.key) 
-		else:
-			var keys : Dictionary = delete_target.store_object.keys
-			keys.erase(delete_target.key)
-		delete_target.queue_free()
-		delete_target = null
-		last_line_index -= 1
+	match id:
+		0:
+			KeyCopier.paste(target.get_parent_obj())
+			update()
+		1:
+			KeyCopier.copy(target.get_parent_obj(), target.key)
+		2:
+			KeyCopier.cut(target.get_parent_obj(), target.key)
+			update()
+		3:
+			if target:
+				if target_is_object:
+					var objects : Dictionary = target.get_parent_obj()["objects"]
+					objects[target.key].free()
+					objects.erase(target.key) 
+				else:
+					var keys : Dictionary = target.get_parent_obj().keys
+					keys.erase(target.key)
+				target.free()
+				target = null
+				last_line_index -= 1
