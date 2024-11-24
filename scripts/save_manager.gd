@@ -19,6 +19,7 @@ func save_project(filename : String):
 
 func load_project(filename : String):
 	if !FileAccess.file_exists("user://" + filename + ".csv_prepare"):
+		GlobalInfo.locales = []
 		save_project(filename)
 	var save_file := FileAccess.open("user://" + filename + ".csv_prepare", FileAccess.READ)
 	while save_file.get_position() < save_file.get_length():

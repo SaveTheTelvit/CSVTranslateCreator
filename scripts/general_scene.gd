@@ -82,6 +82,7 @@ func load(dt : Dictionary):
 	if variable:
 		root_object.load(variable)
 	variable = dt.get("locales")
+	print(variable)
 	if variable:
 		GlobalInfo.locales = variable
 	$Control/HBoxContainer/KeyBox.set_store_object(root_object)

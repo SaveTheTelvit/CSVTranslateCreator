@@ -24,6 +24,10 @@ KeyCopier="*res://scripts/key_copier.gd"
 
 window/size/resizable=false
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://translations/Translate Editon Translations.en.translation", "res://translations/Translate Editon Translations.ru.translation")
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

@@ -33,7 +33,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "Список проектов"
+text = "PROJECT_LIST"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -41,8 +41,7 @@ theme_override_constants/separation = 10
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
-text = "Название проекта:
-"
+text = "PROJECT_NAME"
 
 [node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
@@ -54,7 +53,7 @@ drag_and_drop_selection_enabled = false
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 focus_mode = 0
-text = "Создать новый"
+text = "CREATE_PROJECT_BUTTON"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 visible = false
@@ -77,21 +76,21 @@ size_flags_vertical = 10
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 focus_mode = 0
-text = "Назад"
+text = "TO_BACK"
 
 [node name="ImportButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsLine"]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 focus_mode = 0
-text = "Импорт..."
+text = "IMPORT"
 
 [node name="PopupMenu" type="PopupMenu" parent="."]
 size = Vector2i(96, 62)
 item_count = 2
-item_0/text = "Удалить"
+item_0/text = "POPUP_EXPORT"
 item_0/id = 0
-item_1/text = "Экспорт"
+item_1/text = "POPUP_DELETE"
 item_1/id = 1
 
 [connection signal="text_submitted" from="MarginContainer/VBoxContainer/HBoxContainer3/LineEdit" to="." method="_on_line_edit_text_submitted"]

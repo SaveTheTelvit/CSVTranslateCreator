@@ -1,0 +1,23 @@
+keys,en,ru
+APPLY,Apply,Применить
+EDIT,Edit,Редактировать
+IMPORT,Import...,Импорт...
+PROJECT_LIST,Project list,Список проектов
+PROJECT_NAME,Project name:,Название проекта:
+LOCALES,Localizations,Локализации
+ADD_KEY,Add key,Добавить ключ
+ADD_OBJECT,Add object,Добавить объект
+ADD_PROJECT,Add project,Добавить проект
+CREATE_PROJECT_BUTTON,Create new,Создать новый
+CREATE_PROJECT_LABEL,Adding a new project,Добавление нового проекта
+EXPORT_PROJECT,Export,Экспорт
+EXPORT_TRANSLATION,Translation export (CSV),Экспорт перевода (CSV)
+LINE_KEY,Key,Ключ
+LINE_TEXT,Text,Текст
+POPUP_COPY,Copy,Копировать
+POPUP_CUT,Cut,Вырезать
+POPUP_DELETE,Delete,Удалить
+POPUP_EXPORT,Export,Экспорт
+POPUP_PASTE,Paste,Вставить
+TO_BACK,Back,Назад
+TO_PROJECTS,To projects,К проектам

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://blln2a1ba7gge"]
+[gd_scene load_steps=4 format=3 uid="uid://blln2a1ba7gge"]
 
 [ext_resource type="Script" path="res://scripts/left_panel.gd" id="1_5i12m"]
+[ext_resource type="Texture2D" uid="uid://bjin5jt55e5qw" path="res://images/white_gear.svg" id="2_mykjg"]
+[ext_resource type="Script" path="res://scripts/setting_button.gd" id="3_ghew0"]
 
 [node name="Panel" type="Panel"]
 custom_minimum_size = Vector2(300, 0)
@@ -31,14 +33,26 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 focus_mode = 0
 theme_override_colors/font_pressed_color = Color(0.720467, 0.720468, 0.720467, 1)
-text = "К проектам"
+text = "TO_PROJECTS"
 flat = true
 alignment = 0
+
+[node name="SettingButton" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+self_modulate = Color(0, 0, 0, 0.27451)
+layout_mode = 2
+size_flags_horizontal = 10
+mouse_filter = 0
+texture = ExtResource("2_mykjg")
+expand_mode = 2
+script = ExtResource("3_ghew0")
 
 [node name="MenuButton" type="MenuButton" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 75)
@@ -59,15 +73,15 @@ popup/item_2/id = 2
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-text = "Экспорт перевода (CSV)"
+text = "EXPORT_TRANSLATION"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
 focus_mode = 0
-text = "Назад"
+text = "TO_BACK"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Button" to="." method="_on_proj_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_proj_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

@@ -11,9 +11,7 @@ script = ExtResource("1_qiqum")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
-placeholder_text = "Key
-
-"
+placeholder_text = "LINE_KEY"
 context_menu_enabled = false
 shortcut_keys_enabled = false
 drag_and_drop_selection_enabled = false
@@ -25,8 +23,7 @@ scroll_fit_content_height = true
 [node name="TextEdit" type="TextEdit" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Text
-"
+placeholder_text = "LINE_TEXT"
 context_menu_enabled = false
 drag_and_drop_selection_enabled = false
 virtual_keyboard_enabled = false

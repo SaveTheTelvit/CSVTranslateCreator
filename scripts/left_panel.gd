@@ -25,7 +25,7 @@ func setup_popup():
 	popup_menu.clear()
 	for locale in GlobalInfo.locales:
 		popup_menu.add_item(locale)
-	popup_menu.add_item("Редактировать")
+	popup_menu.add_item(tr("EDIT"))
 
 func _on_current_locale_changet():
 	menu_button.text = GlobalInfo.current_locale.to_upper()

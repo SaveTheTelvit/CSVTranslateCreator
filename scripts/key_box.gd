@@ -103,8 +103,9 @@ func _on_popup_menu_id_pressed(id):
 			if target:
 				if target_is_object:
 					var objects : Dictionary = target.get_parent_obj()["objects"]
-					objects[target.key].free()
-					objects.erase(target.key) 
+					if !target.key.is_empty():
+						objects[target.key].free()
+						objects.erase(target.key) 
 				else:
 					var keys : Dictionary = target.get_parent_obj().keys
 					keys.erase(target.key)

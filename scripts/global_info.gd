@@ -24,7 +24,7 @@ func add_locale(locale : String):
 
 func _set_locales(locals : PackedStringArray):
 	if locals.size() == 0:
-		locales.push_back("en")
+		locales = ["en"]
 	else:
 		locales = locals
 	if locales.find(current_locale) == -1:

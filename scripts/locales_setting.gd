@@ -6,8 +6,8 @@ func open():
 	$MarginContainer/VBoxContainer/TextEdit.clear()
 	for i in GlobalInfo.locales.size():
 		if i != 0:
-			text_edit.text += ", "
-		text_edit.text += GlobalInfo.locales[i]
+			text_edit.text += " "
+		text_edit.text += GlobalInfo.locales[i] + ","
 	show()
 
 func close():

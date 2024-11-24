@@ -11,9 +11,7 @@ script = ExtResource("1_dvv08")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
-placeholder_text = "Key
-
-"
+placeholder_text = "LINE_KEY"
 context_menu_enabled = false
 shortcut_keys_enabled = false
 drag_and_drop_selection_enabled = false
@@ -26,7 +24,7 @@ scroll_fit_content_height = true
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
-text = "Редактировать"
+text = "EDIT"
 
 [connection signal="focus_exited" from="KeyEdit" to="." method="_check_input"]
 [connection signal="gui_input" from="KeyEdit" to="." method="_on_key_edit_gui_input"]
