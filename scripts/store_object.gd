@@ -1,8 +1,15 @@
 class_name StoreObject extends Object
 
+enum TYPE {
+	VIRTUAL,
+	KEY
+}
+
 var keys : Dictionary = {}
 var objects : Dictionary = {}
 var parent : StoreObject
+
+var type: int = TYPE.KEY
 
 func reparent(obj : StoreObject) -> void:
 	parent = obj

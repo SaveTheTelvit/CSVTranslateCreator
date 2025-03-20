@@ -87,7 +87,10 @@ func get_keys_in_obj(object : StoreObject, prepare_string : String = "") -> Arra
 			line.push_back(object.keys[key].get(locale, ""))
 		array.push_back(line)
 	for key in object.objects.keys():
-		for line in get_keys_in_obj(object.objects[key], prepare_string + key + "_"):
+		var next_prepare: String = prepare_string
+		if object.objects[key].type == StoreObject.TYPE.KEY:
+			next_prepare += key + GlobalInfo.prepare
+		for line in get_keys_in_obj(object.objects[key], next_prepare):
 			array.push_back(line)
 	return array
 

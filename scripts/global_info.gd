@@ -5,6 +5,7 @@ signal locales_arr_changet()
 
 var locales : PackedStringArray = ["en"] : set = _set_locales
 var current_locale : String = "en" : set = _set_current_locale
+var prepare: String = "_"
 
 func _set_current_locale(locale : String):
 	current_locale = locale

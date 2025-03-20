@@ -1,5 +1,7 @@
 extends TextureRect
 
+signal clicked
+
 const DF_MODULATION : Color = Color("#00000046")
 const HOVER_MODULATION : Color = Color("#ffffff46")
 const PRESS_MODULATION : Color = Color("#0000008c")
@@ -30,4 +32,6 @@ func _gui_input(event : InputEvent) -> void:
 			pressed = true
 		else:
 			pressed = false
+			if mouse_enter:
+				clicked.emit()
 		_update_modulation()

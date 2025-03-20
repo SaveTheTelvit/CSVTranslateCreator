@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://dodgtgm7lptn1"]
+[gd_scene load_steps=3 format=3 uid="uid://dodgtgm7lptn1"]
 
 [ext_resource type="Script" path="res://scripts/locales_setting.gd" id="1_divgo"]
+
+[sub_resource type="GDScript" id="GDScript_kr2bi"]
+script/source = "extends TextEdit
+
+signal accepted
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey && event.is_pressed() && event.keycode == KEY_ENTER && Input.is_key_pressed(KEY_SHIFT):
+		accepted.emit()
+"
 
 [node name="LocalesSetting" type="Control"]
 layout_mode = 3
@@ -35,6 +45,7 @@ virtual_keyboard_enabled = false
 middle_mouse_paste_enabled = false
 wrap_mode = 1
 scroll_fit_content_height = true
+script = SubResource("GDScript_kr2bi")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -44,4 +55,5 @@ layout_mode = 2
 size_flags_horizontal = 10
 text = "APPLY"
 
+[connection signal="accepted" from="MarginContainer/VBoxContainer/TextEdit" to="." method="_on_text_edit_accepted"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]

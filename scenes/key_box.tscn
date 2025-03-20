@@ -43,7 +43,6 @@ mode = 1
 size = Vector2i(96, 35)
 item_count = 4
 item_0/text = "POPUP_PASTE"
-item_0/id = 0
 item_0/disabled = true
 item_1/text = "POPUP_COPY"
 item_1/id = 1
